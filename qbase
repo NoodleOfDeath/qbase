@@ -1,0 +1,53 @@
+#!/bin/bash
+
+this=$(basename $0)
+
+usage() {
+    echo "usage: $this [-s|--stash] <target-branch>"
+    exit
+}
+
+args=()
+stash=false
+
+while (("$#")); do
+    case "$1" in
+        -s | --stash)
+            stash=true
+            shift
+            ;;
+        *)
+            args+="$1"
+            shift
+            ;;
+    esac
+done
+
+branch="${args[0]}"
+
+if [[ -z "$branch" ]]; then
+    usage
+fi
+
+# grab current branch
+cbranch=$(git branch | grep '*' | cut -d ' ' -f 2)
+
+if [[ -z "$cbranch" ]]; then
+  echo "Error: you are currently not on a branch to rebase"
+  exit
+fi
+
+cmd=
+
+if [[ $stash -eq true ]]; then
+    cmd="git stash && "
+fi
+
+cmd+="git checkout $branch && git pull --rebase && git checkout $cbranch && git rebase $branch "
+
+if [[ $stash -eq true ]]; then
+    cmd+="&& git stash apply"
+fi
+
+echo "$cmd"
+eval "$cmd"
