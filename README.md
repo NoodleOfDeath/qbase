@@ -1,6 +1,8 @@
 # qbase
 Just a simple bash script I wrote for quickly rebasing the current branch against a target branch because I have to do this so damn often. Please let me know if there already exists another CLI tool for this that is better maintained.
 
+I suppose I should rewrite this an npm/pip package for cross-platorm portability...
+
 ## Quick Start
 
 You must have git CLI tools installed, obviously, for this to work. Let me know if I should add this to the apt repo if there really isn't a tool that does this already (which I would find hard to believe).
