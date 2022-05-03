@@ -7,7 +7,7 @@ You must have git CLI tools installed, obviously, for this to work. Let me know 
 
 ```bash
 $ mkdir -p ~/opt/bin
-$ cd ~/tmp
+$ cd /tmp
 $ git clone https://github.com/noodleofdeath/qbase
 $ mv qbase/qbase ~/opt/bin
 $ chmod +x ~/opt/bin/qbase
